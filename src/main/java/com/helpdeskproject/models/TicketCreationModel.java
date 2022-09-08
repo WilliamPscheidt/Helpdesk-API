@@ -14,25 +14,28 @@ public class TicketCreationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long ticket_id ;
-
-    @Column(nullable = true, length = 40)
-    String ticketTitle;
+    @NotEmpty(message = "The title is required.")
+    @Size(min = 2, max = 2000, message = "The length of title must be between 2 and 50 characters.")
+    @Column(nullable = false, length = 50)
+    String ticket_title;
 
     @NotEmpty(message = "The message is required.")
     @Size(min = 2, max = 2000, message = "The length of message must be between 2 and 2000 characters.")
     @Column(nullable = false, length = 2000)
-    String ticketMessage;
+    String ticket_message;
 
-    @Column(nullable = true, length = 40)
-    String ticketStatus;
-
-    @NotEmpty(message = "The token is required")
-    @Size(min = 2, max = 500, message = "The length of token must be between 2 and 500 characters.")
+    @NotEmpty(message = "The status is required.")
+    @Size(min = 2, max = 2000, message = "The length of status must be between 2 and 40 characters.")
     @Column(nullable = false, length = 40)
-    String ticketAuthor;
+    String ticket_status;
 
-    public String getTicket_id () {
-        return ticketTitle;
+    @NotEmpty(message = "The tokenAutor is required")
+    @Size(min = 2, max = 500, message = "The length of tokenAutor must be between 2 and 500 characters.")
+    @Column(nullable = false, length = 40)
+    String ticket_author;
+
+    public Long getTicket_id () {
+        return ticket_id;
     }
 
     public void setTicket_id (Long ticket_id ) {
@@ -40,34 +43,35 @@ public class TicketCreationModel {
     }
 
     public String getTicketTitle() {
-        return ticketTitle;
+        return ticket_title;
     }
 
-    public void setTicketTitle(String ticketTitle) {
-        this.ticketTitle = ticketTitle;
+    public void setTicketTitle(String ticket_title) {
+        this.ticket_title = ticket_title;
     }
 
     public String getTicketMessage() {
-        return ticketMessage;
+        return ticket_message;
     }
 
-    public void setTicketMessage(String ticketMessage) {
-        this.ticketMessage = ticketMessage;
-    }
-
-    public String getTicketAuthor() {
-        return ticketAuthor;
-    }
-
-    public void setTicketAuthor(String ticketAuthor) {
-        this.ticketAuthor = ticketAuthor;
+    public void setTicketMessage(String ticket_message) {
+        this.ticket_message = ticket_message;
     }
 
     public String getTicketStatus() {
-        return ticketStatus;
+        return ticket_status;
     }
 
-    public void setTicketStatus(String ticketStatus) {
-        this.ticketStatus = ticketStatus;
+    public void setTicketStatus(String ticket_status) {
+        this.ticket_status = ticket_status;
     }
+
+    public String getTicketAuthor() {
+        return ticket_author;
+    }
+
+    public void setTicketAuthor(String ticket_author) {
+        this.ticket_author = ticket_author;
+    }
+
 }

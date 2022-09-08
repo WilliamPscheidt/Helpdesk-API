@@ -1,7 +1,6 @@
 package com.helpdeskproject.models;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
