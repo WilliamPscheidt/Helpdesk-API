@@ -2,6 +2,7 @@ package com.helpdeskproject.controllers;
 
 import javax.validation.Valid;
 
+import com.helpdeskproject.utils.TokenSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,8 @@ import com.helpdeskproject.models.TicketCreationModel;
 import com.helpdeskproject.repository.TicketCreationRepository;
 import com.helpdeskproject.utils.ResponseFormatter;
 
+import static com.helpdeskproject.utils.TokenSecurity.VerifyEmailFromToken;
+
 @RestController
 public class TicketController {
 
@@ -19,9 +22,19 @@ public class TicketController {
     TicketCreationRepository repository;
     
     @PostMapping(path = "/ticket/create")
-    public ResponseEntity<String> SaveTicket(@Valid @RequestBody TicketCreationModel ticketCreationModel) {
+    public ResponseEntity SaveTicket(@Valid @RequestBody TicketCreationModel ticketCreationModel) {
 
-        repository.save(ticketCreationModel);
+        try{
+            ticketCreationModel.setTicketAuthor(VerifyEmailFromToken(ticketCreationModel.getTicketAuthor()));
+        } catch (Exception error) {
+            return ResponseEntity.ok().body(ResponseFormatter.SendResponse("error", "Invalid Ticket Provided"));
+        }
+
+        try {
+            repository.save(ticketCreationModel);
+        } catch (Exception error) {
+            return ResponseEntity.ok().body(ResponseFormatter.SendResponse("error", "Error in Data Insertion"));
+        }
 
         return ResponseEntity.ok().body(ResponseFormatter.SendResponse("success", "Ticket Created"));
     }

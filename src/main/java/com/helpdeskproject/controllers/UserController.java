@@ -28,8 +28,12 @@ public class UserController {
 
         userdata.setPassword(PasswordSecurity.Hash(userdata.getPassword()));
 
-        try{repository.save(userdata);}
-        catch(DataAccessException e) {return ResponseEntity.badRequest().body(ResponseFormatter.SendResponse("error", "user already created"));}
+        try{
+            repository.save(userdata);
+        }
+        catch(DataAccessException e) {
+            return ResponseEntity.badRequest().body(ResponseFormatter.SendResponse("error", "user already created"));
+        }
 
         return ResponseEntity.ok().body(ResponseFormatter.SendResponse("success", "user registered"));
     }
