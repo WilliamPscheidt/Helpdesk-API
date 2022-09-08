@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/api/login/")
-    public ResponseEntity<String> LoginUser(@RequestBody  UserLoginModel userloginmodel) {
+    public ResponseEntity<String> LoginUser(@Valid @RequestBody  UserLoginModel userloginmodel) {
 
         String[] dataQuery = LoginUserRepository.ExecuteQuery();
 
