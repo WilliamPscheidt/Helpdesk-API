@@ -1,4 +1,4 @@
-package com.helpdeskproject.services;
+package com.helpdeskproject.utils;
 
 import java.util.Date;
 

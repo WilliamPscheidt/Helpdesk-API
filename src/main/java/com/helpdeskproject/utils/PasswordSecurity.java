@@ -1,4 +1,4 @@
-package com.helpdeskproject.services;
+package com.helpdeskproject.utils;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
