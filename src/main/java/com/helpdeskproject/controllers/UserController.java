@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.helpdeskproject.models.UserLoginModel;
 import com.helpdeskproject.models.UserModel;
 import com.helpdeskproject.repository.LoginUserRepository;
 import com.helpdeskproject.repository.UserRepository;
@@ -35,11 +36,11 @@ public class UserController {
     }
 
     @PostMapping(path = "/api/login/")
-    public ResponseEntity<String> LoginUser(@RequestParam String email, String password) {
+    public ResponseEntity<String> LoginUser(@RequestBody  UserLoginModel userloginmodel) {
 
         String[] dataQuery = LoginUserRepository.ExecuteQuery();
 
-        if(PasswordSecurity.Verify(password, dataQuery[1])){
+        if(PasswordSecurity.Verify(userloginmodel.getPassword(), dataQuery[1])){
             return ResponseEntity.ok().body("Success: User logged");
         } else {
             return ResponseEntity.badRequest().body("Error: invalid");
