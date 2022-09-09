@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.helpdeskproject.models.UserLoginModel;
 
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
